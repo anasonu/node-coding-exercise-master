@@ -1,13 +1,13 @@
 function cleanDuplicates(array, key) {
-  array.forEach((item) => {
-    item[`${key}`] = item[`${key}`].filter((object, index) => {
+  array.forEach((element) => {
+    element[`${key}`] = element[`${key}`].filter((object, index) => {
       return (
-        item[`${key}`].findIndex((item) => {
+        element[`${key}`].findIndex((item) => {
           return item.key === object.key;
         }) === index
       );
     });
-    return item[`${key}`];
+    return element[`${key}`];
   });
 }
 

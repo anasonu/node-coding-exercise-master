@@ -13,7 +13,7 @@ router.get("/", (_, res, next) => {
     cleanDuplicates(versions, "scenes");
     cleanDuplicates(scenesArr, "views");
 
-    res.json(versions);
+    res.json(jsonFile);
   } catch (error) {
     next(error);
   }
