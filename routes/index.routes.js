@@ -3,23 +3,17 @@ const jsonFile = require("../mock_application.json");
 const cleanDuplicates = require("../utils/cleanDuplicates");
 
 router.get("/", (_, res, next) => {
-    let objectsArr = jsonFile.versions[0].objects;
-    let scenesArr = jsonFile.versions[0].scenes;
+    const versions = jsonFile.versions;
+    const objectsArr = jsonFile.versions[0].objects;
+    const scenesArr = jsonFile.versions[0].scenes;
 
   try {
-    jsonFile.versions[0].objects = (cleanDuplicates(objectsArr));
-    objectsArr = jsonFile.versions[0].objects;
-    objectsArr.forEach((object) => {
-        object.fields = cleanDuplicates(object.fields);
-    })
-    
-    jsonFile.versions[0].scenes = cleanDuplicates(scenesArr);
-    scenesArr = jsonFile.versions[0].scenes
-    scenesArr.forEach((scene) => {
-        scene.views = cleanDuplicates(scene.views);
-    })
-    
-    res.json(jsonFile)
+    cleanDuplicates(versions, "objects");
+    cleanDuplicates(objectsArr, "fields");
+    cleanDuplicates(versions, "scenes");
+    cleanDuplicates(scenesArr, "views");
+
+    res.json(versions);
   } catch (error) {
     next(error);
   }

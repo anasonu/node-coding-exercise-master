@@ -1,13 +1,16 @@
-function cleanDuplicates(array) {
-  const unique = array.filter((object, index) => {
-    return (
-      array.findIndex((item) => {
-        return item.key === object.key;
-      }) === index
-    );
+function cleanDuplicates(array, key) {
+  const cleanArray = array.forEach((item) => {
+    item[`${key}`] = item[`${key}`].filter((object, index) => {
+      return (
+        item[`${key}`].findIndex((item) => {
+          return item.key === object.key;
+        }) === index
+      );
+    });
+    return item[`${key}`];
   });
 
-  return unique;
+  return cleanArray;
 }
 
 module.exports = cleanDuplicates;
